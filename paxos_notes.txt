@@ -1,3 +1,25 @@
+Fail Stop vs Byzantine?
+Fail-Stop Model: In this model, a faulty process or node is assumed to simply stop functioning (crash). When a node fails, it halts and sends no further messages. Other processes can detect that the faulty process has stopped. This is a relatively simple and well-behaved failure model.
+
+Byzantine Model: This is the most general and difficult failure model to handle. A Byzantine faulty process can exhibit arbitrary behavior. This includes stopping, sending incorrect or contradictory information to different processes, colluding with other faulty processes, or deliberately trying to disrupt the system. Other processes may not be able to easily detect that a Byzantine faulty process is indeed faulty or what its state is.
+
+Paxos is Fail Stop
+
+Requirements for Basic Paxos:
+Safety-> Only a single value is chosen.
+         A server never learns that a value has been chosen unless it has really been.
+Liveliness(as long as majority of the servers are live and responding with timeliness)-> Some proposed value is chosen.
+                                                                                          If a value is chosen, servers eventually learn about it.
+
+Proposers:
+    Active:put forth particular values to be chosen
+    Handle client requests.
+Acceptors:
+    Passive: respond to messages from Proposers.
+    Responses represent votes that form consensus.
+    Store chosen value, state of the decision process.
+    Want to know which value is chosen.
+
 The Coordinator Selection Process
 Sequence Number Management
 Every replica in the system maintains a local record of the highest sequence number it has encountered so far. 
